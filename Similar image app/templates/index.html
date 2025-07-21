@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gallery-Match</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Gallery-Match</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <label>Upload the image you want to find simillar pictures to:</label><br>
+        <input type="file" name="query_image" accept="image/*" required><br><br>
+
+        <label>Upload all your images (select multiple):</label><br>
+        <input type="file" name="gallery_images" accept="image/*" multiple required><br><br>
+
+        <input type="submit" value="Find Similar Images">
+    </form>
+
+    <div class="buttons-container"> <form method="POST" action="/reset" style="display: inline-block; margin-right: 10px;">
+            <button type="submit">Reset</button>
+        </form>
+
+        {% if results %}
+            <form method="get" action="{{ url_for('download_matches') }}" style="display: inline-block;">
+                {% for match, score in results %}
+                    <input type="hidden" name="files" value="{{ match }}">
+                {% endfor %}
+                <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-4" type="submit">
+                    Download Matches as ZIP
+                </button>
+            </form>
+        {% endif %}
+    </div>
+
+    {% if query_image %}
+        <div class="query-section">
+            <h3>Query Image</h3>
+            <img src="{{ url_for('static', filename=query_image) }}">
+        </div>
+
+        <h2 style="text-align:center;">Top Matches</h2>
+        <div class="gallery">
+            {% for image, score in results %}
+                <div class="image-card">
+                    <img src="{{ url_for('static', filename=image) }}">
+                    <div class="score">Score: {{ '{:.2f}'.format(score) }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</body>
+</html>
