@@ -6,12 +6,10 @@ import numpy as np
 import os
 from sklearn.metrics.pairwise import cosine_similarity
 
-# Load pre-trained model (without final classification layer)
 model = resnet50(pretrained=True)
 model = torch.nn.Sequential(*list(model.children())[:-1])
 model.eval()
 
-# Preprocessing
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
