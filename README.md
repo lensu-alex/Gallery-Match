@@ -48,3 +48,40 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install Flask torch torchvision scikit-learn numpy Pillow
+```
+## Usage ▶️
+
+Run the app:
+
+```bash
+python app.py
+# Open http://127.0.0.1:5000
+
+# Upload:
+
+# Query Image: Your target image
+
+# Gallery Images: Collection to search
+
+# -> Click "Find Similar Images"
+
+# Results show:
+
+# -> Top 5 matches
+
+# -> Similarity scores (0-1)
+
+# -> Download button for matches
+```
+## Project Structure 📁
+```
+├── app.py              # Flask backend
+├── utils.py            # Feature extraction & similarity
+├── static/
+│   ├── style.css       # Frontend styling
+│   ├── uploaded_gallery/ # Gallery images
+│   └── uploaded_query/   # Query images
+├── templates/
+│   └── index.html      # Main interface
+└── README.md           # Documentation
+```
