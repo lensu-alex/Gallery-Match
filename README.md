@@ -1,4 +1,4 @@
-# Image Similarity Finder ✨  
+# Gallery-Match ✨  
 
 **Find visually similar images in your gallery with ease!**  
 
